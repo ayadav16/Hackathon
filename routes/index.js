@@ -28,8 +28,9 @@ router.get('/logout', async (req,res)=>{
         
     }
     res.redirect('/')
-
-
+})
+router.get('/cat', async (req,res)=>{
+    res.render('cat')
 })
 
 module.exports = router
