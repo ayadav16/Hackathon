@@ -8,6 +8,7 @@ const bodyParser =  require('body-parser')
 const indexRouter = require('./routes/index')
 const userApiRouter = require('./routes/api/users');
 const dashRouter = require('./routes/dashboard/dashboard') 
+const quizRouter = require('./routes/quiz')
 
 app.set('view engine','ejs')
 app.set('views',__dirname+'/views')
@@ -31,7 +32,7 @@ db.once('open',()=>console.log('Connected to Mongoose'))
 app.use(cookieParser())
 app.use('/dashboard',dashRouter)
 app.use('/',indexRouter)
-
+app.use('/quiz', quizRouter)
 app.use('/api/users',userApiRouter)
 
 app.listen(process.env.PORT || 3000)

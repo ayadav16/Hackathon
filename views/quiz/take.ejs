@@ -1,0 +1,49 @@
+
+<h2><%=quiz.title%></h2>
+<form action="/quiz/take/<%=quiz.id%> " method="post">    
+    <div class="form-group">
+        <input type="hidden" class="form-control" id="lat" name="latitude">
+        <input type="hidden" class="form-control" id="long" name="longitude">
+    </div>
+    <div class="form-group">
+        <label>Location</label>
+        <input type="button" class="form-control"  name="location" onclick="getLocation()">
+    </div>
+    <div class="form-group">
+        <label>IP/Router ID</label>
+        <input type="text" class="form-control" name="ip">
+    </div>
+    <div class="form-group">
+        <ul>
+            <li>
+                question 1
+            </li>
+            <li>
+                question 2
+            </li>
+            <li>
+                question 3
+            </li>
+        </ul>
+    </div>
+    <button type="submit" class="btn btn-warning btn-lg">Create</button>
+</form>
+
+<hr>
+<script>
+    var lat = document.getElementById("lat");
+    var long = document.getElementById("long");
+    function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+    }
+    function showPosition(position) {
+        lat.value=position.coords.latitude;
+        long.value=position.coords.longitude;
+
+    }
+
+</script>

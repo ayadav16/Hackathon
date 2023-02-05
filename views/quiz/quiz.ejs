@@ -1,0 +1,9 @@
+<h1>Hello <%= user.name  %> </h1>
+<div>
+    <h2>Open to Take Quizzes</h2>
+    <ul>
+        <% quizzes.forEach(quiz =>{ %>
+            <li><%=quiz.title%> <a href="/quiz/<%=quiz.id%>"> take quiz</a></li>
+        <% }) %>
+    </ul>
+</div>
