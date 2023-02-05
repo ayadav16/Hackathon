@@ -1,9 +1,9 @@
-<h1>Hello <%= user.name  %> </h1>
+<%- include('../../dashboard/instructor') %>
 <div>
     <h2>Submissions</h2>
     <ul>
         <% submissions.forEach(submission =>{ %>
-            <li><%=quiz.id%> <%=submission.id%></li>
+            <li><%=submission.submission.user%> <%=submission.inClass%>metres </li>
         <% }) %>
     </ul>
 </div>

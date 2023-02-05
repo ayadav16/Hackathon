@@ -3,33 +3,34 @@ const router = express.Router()
 const authenticateToken = require('./api/auth')
 const Quiz = require('../models/quiz')
 const Submission = require('../models/submission')
+const geolib = require('geolib')
+const submission = require('../models/submission')
 
 router.get('/',authenticateToken,async (req,res)=>{
     const quiz = await Quiz.find({status:true})
     if(req.user.instructor){
-        res.render('quiz/instructor/quiz',{user:req.user, quizzes:quiz})
+        return res.render('quiz/instructor/quiz',{user:req.user, quizzes:quiz})
     }
-    res.render('quiz/quiz',{user:req.user, quizzes:quiz})
+    return res.render('quiz/quiz',{user:req.user, quizzes:quiz})
 })
 
 router.get('/take',authenticateToken,async (req,res)=>{
     const quizTaken = await (await Submission.find({user:req.user.id},{quiz:1})).map(function(a){return a.quiz;})
-    console.log(quizTaken)
     const quiz = await Quiz.find({status:true, _id:{$nin:quizTaken}})
 
-    res.render('quiz/quiz',{user:req.user, quizzes:quiz})
+    return res.render('quiz/quiz',{user:req.user, quizzes:quiz})
 })
 router.get('/submitted',authenticateToken, async(req,res)=>{
     const quizTaken = await (await Submission.find({user:req.user.id},{quiz:1})).map(function(a){return a.quiz;})
     const quiz = await Quiz.find({status:true, _id:{$in:quizTaken}})
-    res.render('quiz/submitted',{user:req.user, quizzes:quiz})
+    return res.render('quiz/submitted',{user:req.user, quizzes:quiz})
 })
 
 router.get('/new',authenticateToken,(req,res)=>{
     if(!req.user.instructor){
-        res.sendStatus(403)
+        return res.sendStatus(403)
     }
-    res.render('quiz/new', { quiz: new Quiz()})
+    return res.render('quiz/new', { quiz: new Quiz(), user:req.user})
 })
 
 router.post('/',authenticateToken,async (req,res)=>{
@@ -42,24 +43,36 @@ router.post('/',authenticateToken,async (req,res)=>{
     })
     try{
         const newQuiz = await quiz.save()
-        res.redirect('/dashboard')
+        return res.redirect('/dashboard')
     }catch(e){
-        console.log(quiz)
-        console.log(e)
-        res.render('quiz/new',{quiz:quiz,errorMessage:"Cannot create quiz"})
+        return res.render('quiz/new',{quiz:quiz,errorMessage:"Cannot create quiz"})
     }
 })
 
 router.get("/:id",authenticateToken, async (req,res)=>{
     const quiz = await Quiz.findById(req.params.id,{id:1,title:1})
-    res.render('quiz/take',{quiz:quiz})
+    return res.render('quiz/take',{quiz:quiz, user:req.user})
 })
 
 router.get("/summary/:id",authenticateToken, async (req,res)=>{
-    const submissions = await Submission.find({quiz:req.params.id})
+    const submissions = await Submission.find({quiz:req.params.id}).lean()
     const quiz = await Quiz.findById(req.params.id)
 
-    res.render('quiz/instructor/submissions',{submissions:submissions,user:req.user,quiz:quiz})
+    const l1 = Number(quiz.latitude)
+    const l2 = Number(quiz.longitude)
+    const obj = []
+
+    submissions.forEach(submission => {
+        obj.push({
+            submission: submission,
+            inClass: geolib.getDistance(
+                {latitude:Number(submission.latitude),longitude:Number(submission.longitude)},
+                {latitude: l1, longitude: l2}
+                ),
+        })
+ 
+    })
+    return res.render('quiz/instructor/submissions',{submissions:obj,user:req.user,quiz:quiz})
 })
 
 router.post("/submit/:id", authenticateToken,async (req,res)=>{
@@ -72,11 +85,9 @@ router.post("/submit/:id", authenticateToken,async (req,res)=>{
     })
     try{
         const newsubmission= await submission.save()
-        res.redirect('/dashboard')
+        return res.redirect('/dashboard')
     }catch(e){
-        console.log(submission)
-        console.log(e)
-        res.render('quiz/take/',{quiz:quiz,errorMessage:"Cannot submit quiz"})
+        return res.render('quiz/take/',{quiz:quiz,errorMessage:"Cannot submit quiz"})
     }
 })
 
