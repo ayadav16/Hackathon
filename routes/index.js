@@ -7,15 +7,9 @@ router.get('/', (req,res)=>{
     res.render('index',{user:localsName.user||null})
 })
 router.get('/login', (req, res)=>{
-    if(user!=null){
-        res.redirect('/dashboard')
-    }
     res.render('login',{user:new user})
 })
 router.get('/register', (req, res)=>{
-    if(user!=null){
-        res.redirect('/dashboard')
-    }
     res.render('register',{user:new user})
 })
 router.get('/logout', (req,res)=>{
