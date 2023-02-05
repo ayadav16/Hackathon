@@ -1,28 +1,38 @@
+<%- include('./index') %>
+<br>
+<div class="columns">
+    <div class="column"></div>
+    <div class="column">
 <form action="/api/users/register" method="post">
-    <div class="form-group">
-        <label>Email</label>
-        <input type="text" class="form-control" name="email" value="<%=user.email%>">
+    <div class="field">
+        <label class="label">Email</label>
+        <input class="input is-danger is-rounded" type="text" name="email" value="<%=user.email%>">
     </div>
-    <div class="form-group">
-        <label>Name</label>
-        <input type="text" class="form-control" name="name">
+    <div class="field">
+        <label class="label">Full Name</label>
+        <input class="input is-danger is-rounded"  type="text" name="name">
     </div>
-    <div class="form-group">
-        <label>Password</label>
-        <input type="password" class="form-control" name="password">
+    <div class="field">
+        <label class="label">Password</label>
+        <input class="input is-danger is-rounded" type="password" name="password">
     </div>
-    <div class="form-group">
-        <label>Re-enter Password</label>
-        <input type="password" class="form-control" name="password2">
+    <div class="field">
+        <label class="label">Re-enter Password</label>
+        <input class="input is-danger is-rounded" type="password" name="password2">
     </div>
-    <div class="form-group">
-        <label>Are you an instructor?</label>
-        <input type="checkbox" class="form-control" name="instructor">
+    <div class="field">
+        <input class="checkbox is-danger" type="checkbox" name="instructor">
+        <label class="checkbox"> I am an instructor.
+    </label>
     </div>
-    <button type="submit" class="btn btn-warning btn-lg">Signup</button>
+    <button type="submit" class="button is-danger">Signup</button>
 </form>
 
 <hr>
 
 <p>Already have an account? <a href="/login">Login</a></p>
 <p>Or go <a href="/">home</a>.</p>
+</div>
+<div class="column"></div>
+
+</div>

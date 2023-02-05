@@ -1,9 +1,34 @@
 <%- include('../../dashboard/instructor') %>
-<div>
-    <h2>Submissions</h2>
-    <ul>
-        <% submissions.forEach(submission =>{ %>
-            <li><%=submission.submission.user%> <%=submission.inClass%>metres </li>
-        <% }) %>
-    </ul>
+<div class="conatiner">
+    <div class="columns">
+        <div class="column"></div>
+    <div class="column">
+        <h2 class="subtitle is-3">Submission</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Used ID</th>
+                    <th>Proximity</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Used ID</th>
+                    <th>Proximity</th>
+                </tr>
+            </tfoot>
+            <tbody>
+                <% submissions.forEach(submission =>{ %>
+                    <tr>
+                        <td><%=submission.submission.user%></td>
+                        <td><%=submission.inClass%> mtr</td>
+                    </tr>
+                <% }) %>
+            </tbody>
+
+        </table>
+
+    </div>
+    <div class="column"></div>
+</div>
 </div>

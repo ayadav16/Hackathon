@@ -76,6 +76,7 @@ router.get("/summary/:id",authenticateToken, async (req,res)=>{
 })
 
 router.post("/submit/:id", authenticateToken,async (req,res)=>{
+    const quiz = await Quiz.findById(req.params.id)
     const submission = new Submission({
         latitude: req.body.latitude,
         longitude: req.body.longitude,
@@ -87,7 +88,8 @@ router.post("/submit/:id", authenticateToken,async (req,res)=>{
         const newsubmission= await submission.save()
         return res.redirect('/dashboard')
     }catch(e){
-        return res.render('quiz/take/',{quiz:quiz,errorMessage:"Cannot submit quiz"})
+        console.log(e)
+        return res.render('quiz/take',{quiz:quiz,user:req.user,errorMessage:"Cannot submit quiz"})
     }
 })
 

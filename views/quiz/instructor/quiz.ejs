@@ -1,9 +1,39 @@
 <%- include('../../dashboard/instructor') %>
-<div>
-    <h2>Quizzes</h2>
-    <ul>
-        <% quizzes.forEach(quiz =>{ %>
-            <li><%=quiz.title%> <a href="/quiz/summary/<%=quiz.id%>">Open Submission</a></li>
-        <% }) %>
-    </ul>
+<div class="container">
+    <div class="columns">
+        <div class="column"></div>
+    <div class="column">
+        <h2 class="subtitle is-3">All Quizzes</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Date Created</th>
+                    <th>Submission</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Title</th>
+                    <th>Date Created</th>
+                    <th>Submission</th>
+                </tr>
+            </tfoot>
+            
+            <tbody>
+                <% quizzes.forEach(quiz =>{ %>
+                    <tr>
+                        <td><%=quiz.title%></td>
+                        <td><%=quiz.date%></td>
+                        <td><a href="/quiz/summary/<%=quiz.id%>">View Submissios</a></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+
+        </table>
+
+    </div>
+    <div class="column"></div>
+
+</div>
 </div>

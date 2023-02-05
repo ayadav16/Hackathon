@@ -1,14 +1,21 @@
-<form action="/api/users/login" method="post">
-    <div class="form-group">
-        <label>Email</label>
-        <input type="text" class="form-control" name="email">
-    </div>
-    <div class="form-group">
-        <label>Password</label>
-        <input type="password" class="form-control" name="password">
-    </div>
-    <button type="submit" class="btn btn-warning btn-lg">Login</button>
-</form>
+<%- include('./index') %>
+<div class="columns">
+    <div class="column"></div>
+    <div class="column">
+    <form action="/api/users/login" method="post">
+        <div class="field">
+            <label class="label">Email</label>
+            <input class="input is-danger is-rounded" type="text" class="form-control" name="email">
+        </div>
+        <div class="field">
+            <labe class="label">Password</label>
+            <input class="input is-danger is-rounded" type="password" class="form-control" name="password">
+        </div>
+        <button  type="submit" class="button is-danger">Login</button>
+    </form>
 
 <p>Don't have an account? <a href="/register">Register</a></p>
 <p>Or go <a href="/">home</a>.</p>
+</div>
+<div class="column"></div>
+</div>
