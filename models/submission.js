@@ -21,6 +21,11 @@ const SubmissionSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'Quiz'
+      },
+      user:{
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'User'
       }
 })
 

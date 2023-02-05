@@ -1,0 +1,9 @@
+<h1>Hello <%= user.name  %> </h1>
+<div>
+    <h2>Submissions</h2>
+    <ul>
+        <% submissions.forEach(submission =>{ %>
+            <li><%=quiz.id%> <%=submission.id%></li>
+        <% }) %>
+    </ul>
+</div>

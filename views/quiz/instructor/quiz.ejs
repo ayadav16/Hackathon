@@ -1,9 +1,9 @@
 <h1>Hello <%= user.name  %> </h1>
 <div>
-    <h2>Submitted Quizzes</h2>
+    <h2>Quizzes</h2>
     <ul>
         <% quizzes.forEach(quiz =>{ %>
-            <li><%=quiz.title%></li>
+            <li><%=quiz.title%> <a href="/quiz/summary/<%=quiz.id%>">Open Submission</a></li>
         <% }) %>
     </ul>
 </div>

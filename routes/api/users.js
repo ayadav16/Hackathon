@@ -25,7 +25,7 @@ router.post('/register', (req,res) => {
                 name: req.body.name,
                 email:req.body.email,
                 password: req.body.password,
-                instructor: req.body.instructor
+                instructor: req.body.instructor=="on"?true:false
             });
             try{
                 bcrypt.genSalt(10,(err,salt)=>{
@@ -36,7 +36,7 @@ router.post('/register', (req,res) => {
                         newUser.password = hash;
                         newUser
                             .save()
-                            .then(user => res.json(user))
+                            .then(user => res.redirect('/'))
                             .catch(err => console.log(err))
     
                     })
