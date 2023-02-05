@@ -7,14 +7,16 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Used ID</th>
+                    <th>User ID</th>
                     <th>Proximity</th>
+                    <th>Submitted At</th>
                 </tr>
             </thead>
             <tfoot>
                 <tr>
-                    <th>Used ID</th>
+                    <th>User ID</th>
                     <th>Proximity</th>
+                    <th>Submitted At</th>
                 </tr>
             </tfoot>
             <tbody>
@@ -22,6 +24,7 @@
                     <tr>
                         <td><%=submission.submission.user%></td>
                         <td><%=submission.inClass%> mtr</td>
+                        <td><%=submission.submission.date%> mtr</td>
                     </tr>
                 <% }) %>
             </tbody>
