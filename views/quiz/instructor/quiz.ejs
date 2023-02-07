@@ -9,6 +9,7 @@
                 <tr>
                     <th>Title</th>
                     <th>Date Created</th>
+                    <th>Exam Hall IP</th>
                     <th>Submission</th>
                 </tr>
             </thead>
@@ -16,6 +17,7 @@
                 <tr>
                     <th>Title</th>
                     <th>Date Created</th>
+                    <th>Exam Hall IP</th>
                     <th>Submission</th>
                 </tr>
             </tfoot>
@@ -23,8 +25,9 @@
             <tbody>
                 <% quizzes.forEach(quiz =>{ %>
                     <tr>
-                        <td><%=quiz.title%></td>
-                        <td><%=quiz.date%></td>
+                        <td><%=quiz.title%></td> 
+                        <td><%=quiz.date%> </td>
+                        <td><%=quiz.ip%></td>
                         <td><a href="/quiz/summary/<%=quiz.id%>">View Submissios</a></td>
                     </tr>
                 <% }) %>

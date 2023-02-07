@@ -39,7 +39,8 @@ router.post('/',authenticateToken,async (req,res)=>{
         status:req.body.status=="on"?true:false,
         latitude:req.body.latitude,
         longitude:req.body.longitude,
-        ip:req.body.ip
+        ip: req.headers['x-forwarded-for'] || req.socket.remoteAddress || req.body.ip
+
     })
     try{
         const newQuiz = await quiz.save()
@@ -80,7 +81,7 @@ router.post("/submit/:id", authenticateToken,async (req,res)=>{
     const submission = new Submission({
         latitude: req.body.latitude,
         longitude: req.body.longitude,
-        ip: req.body.ip,
+        ip:  req.headers['x-forwarded-for'] || req.socket.remoteAddress || req.body.ip,
         quiz:req.params.id,
         user:req.user.id
     })

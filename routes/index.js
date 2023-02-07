@@ -5,6 +5,7 @@ const router = express.Router()
 const auth = require('../routes/api/auth')
 
 router.get('/', async (req,res)=>{
+    console.log(req.headers['x-forwarded-for'] || req.socket.remoteAddress )
     if(await auth.isLoggedIn(req)){
         res.redirect('/dashboard')
     }

@@ -9,6 +9,7 @@
                 <tr>
                     <th>User ID</th>
                     <th>Proximity</th>
+                    <th>Student N/W IP</th>
                     <th>Submitted At</th>
                 </tr>
             </thead>
@@ -16,6 +17,7 @@
                 <tr>
                     <th>User ID</th>
                     <th>Proximity</th>
+                    <th>Student N/W IP</th>
                     <th>Submitted At</th>
                 </tr>
             </tfoot>
@@ -24,6 +26,7 @@
                     <tr>
                         <td><%=submission.submission.user%></td>
                         <td><%=submission.inClass%> mtr</td>
+                        <td><%=submission.submission.ip%></td>
                         <td><%=submission.submission.date%> mtr</td>
                     </tr>
                 <% }) %>
